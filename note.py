@@ -61,11 +61,37 @@ class Note:
                 case 11:
                     self.note = "b"
 
+    @property
     def major(self):
         return self.intervals_to_chords([0, 4, 7])
 
+    @property
     def minor(self):
         return self.intervals_to_chords([0, 3, 7])
+
+    @property
+    def sus2(self):
+        return self.intervals_to_chords([0, 2, 7])
+
+    @property
+    def sus4(self):
+        return self.intervals_to_chords([0, 5, 7])
+
+    @property
+    def seventh(self):
+        return Note(number=self.number + 10)
+
+    @property
+    def major_seventh(self):
+        return Note(number=self.number + 11)
+
+    @property
+    def ninth(self):
+        return Note(number=self.number + 2)
+
+    @property
+    def eleventh(self):
+        return Note(number=self.number + 5)
 
     def intervals_to_chords(self, intervals):
         notes = []
@@ -82,8 +108,32 @@ def test_note():
 
 
 def test_major():
-    assert [i.note for i in Note(note="c").major()] == ["c", "e", "g"]
+    assert [i.note for i in Note(note="c").major] == ["c", "e", "g"]
 
 
 def test_minor():
-    assert [i.note for i in Note(note="c").minor()] == ["c", "d#", "g"]
+    assert [i.note for i in Note(note="c").minor] == ["c", "d#", "g"]
+
+
+def test_sus2():
+    assert [i.note for i in Note(note="c").sus2] == ["c", "d", "g"]
+
+
+def test_sus4():
+    assert [i.note for i in Note(note="c").sus4] == ["c", "f", "g"]
+
+
+def test_seventh():
+    assert Note(note="c").seventh.note == "a#"
+
+
+def test_major_seventh():
+    assert Note(note="c").major_seventh.note == "b"
+
+
+def test_ninth():
+    assert Note(note="c").ninth.note == "d"
+
+
+def test_eleventh():
+    assert Note(note="c").eleventh.note == "f"
