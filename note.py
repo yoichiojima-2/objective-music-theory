@@ -79,19 +79,19 @@ class Note:
 
     @property
     def seventh(self):
-        return Note(number=self.number + 10)
+        return Note(number=(self.number + 10) % 12)
 
     @property
     def major_seventh(self):
-        return Note(number=self.number + 11)
+        return Note(number=(self.number + 11) % 12)
 
     @property
     def ninth(self):
-        return Note(number=self.number + 2)
+        return Note(number=(self.number + 2) % 12)
 
     @property
     def eleventh(self):
-        return Note(number=self.number + 5)
+        return Note(number=(self.number + 5) % 12)
 
     def intervals_to_chords(self, intervals):
         notes = []
