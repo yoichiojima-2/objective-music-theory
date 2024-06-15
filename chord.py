@@ -36,13 +36,13 @@ class Chord:
         self.add_n(17)
         return self.sort()
 
-    def interval_to_pitches(self, interval: list[int]):
+    def interval_to_pitches(self, interval: list[int]) -> list[Pitch]:
         pitches = []
         for i in interval:
             pitches.append(Pitch.new_with_number(self.root.number + i))
         return pitches
 
-    def sort(self):
+    def sort(self) -> Pitch:
         self.pitches = sorted(self.pitches, key=lambda x: x.number + x.octave * 12)
         return self
         
