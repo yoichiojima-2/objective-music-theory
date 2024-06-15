@@ -1,1 +1,1 @@
-# music
+# objective-music-theory
