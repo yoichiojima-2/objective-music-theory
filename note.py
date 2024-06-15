@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 class Note:
     def __init__(self, note: str = None, number: int = None):
         if note is not None and number is not None:
@@ -93,11 +95,20 @@ class Note:
     def eleventh(self):
         return Note(number=(self.number + 5) % 12)
 
-    def intervals_to_chords(self, intervals):
+    def intervals_to_chords(self, intervals) -> Chord:
         notes = []
         for i in intervals:
             notes.append(Note(number=(self.number + i) % 12))
-        return notes
+        return Chord(notes)
+
+
+class Chord:
+    def __init__(self, notes: list[Note]):
+        self.notes = notes
+
+    @property
+    def root(self):
+        return self.notes[0]
 
 
 def test_note():
@@ -108,19 +119,19 @@ def test_note():
 
 
 def test_major():
-    assert [i.note for i in Note(note="c").major] == ["c", "e", "g"]
+    assert [i.note for i in Note(note="c").major.notes] == ["c", "e", "g"]
 
 
 def test_minor():
-    assert [i.note for i in Note(note="c").minor] == ["c", "d#", "g"]
+    assert [i.note for i in Note(note="c").minor.notes] == ["c", "d#", "g"]
 
 
 def test_sus2():
-    assert [i.note for i in Note(note="c").sus2] == ["c", "d", "g"]
+    assert [i.note for i in Note(note="c").sus2.notes] == ["c", "d", "g"]
 
 
 def test_sus4():
-    assert [i.note for i in Note(note="c").sus4] == ["c", "f", "g"]
+    assert [i.note for i in Note(note="c").sus4.notes] == ["c", "f", "g"]
 
 
 def test_seventh():
