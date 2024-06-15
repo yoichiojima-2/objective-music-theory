@@ -1,5 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
+from enum import Enum
 
 
 @dataclass
@@ -26,28 +27,27 @@ class Pitch:
     num_to_name = {num: name for num, name in hash}
     name_to_num = {name: num for num, name in hash}
 
-    @classmethod
-    def new_with_number(cls, number) -> Pitch:
-        return Pitch(
-            name=cls.num_to_name[number % 12], number=number % 12, octave=number // 12
-        )
-
-    @classmethod
-    def new_with_name(cls, name, octave=0) -> Pitch:
-        return Pitch(
-            name=name,
-            number=cls.name_to_num[name],
-            octave=octave,
-        )
+    def __init__(self, arg):
+        match arg:
+            case int():
+                self.name = self.num_to_name[arg % 12]
+                self.number = arg % 12
+                self.octave = arg // 12
+            case str():
+                self.name = arg
+                self.number = self.name_to_num[arg]
+                self.octave = 0
+            case _:
+                raise ValueError("Invalid argument")
 
 
 def test_pitch():
-    c = Pitch.new_with_name("c")
+    c = Pitch("c")
     print(c)
     assert c.number == 0
     assert c.name == "c"
 
-    a = Pitch.new_with_number(9)
+    a = Pitch(9)
     print(a)
     assert a.number == 9
     assert a.name == "a"
