@@ -27,13 +27,13 @@ class Pitch:
     name_to_num = {name: num for num, name in hash}
 
     @classmethod
-    def new_with_number(cls, number):
+    def new_with_number(cls, number) -> Pitch:
         return Pitch(
             name=cls.num_to_name[number % 12], number=number % 12, octave=number // 12
         )
 
     @classmethod
-    def new_with_name(cls, name, octave=0):
+    def new_with_name(cls, name, octave=0) -> Pitch:
         return Pitch(
             name=name,
             number=cls.name_to_num[name],
