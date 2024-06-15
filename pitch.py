@@ -28,14 +28,16 @@ class Pitch:
 
     @classmethod
     def new_with_number(cls, number):
-        return Pitch(name=cls.num_to_name[number], number=number, octave=0)
+        return Pitch(
+            name=cls.num_to_name[number % 12], number=number % 12, octave=number // 12
+        )
 
     @classmethod
-    def new_with_name(cls, name):
+    def new_with_name(cls, name, octave=0):
         return Pitch(
             name=name,
             number=cls.name_to_num[name],
-            octave=0,
+            octave=octave,
         )
 
 
