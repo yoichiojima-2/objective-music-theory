@@ -15,7 +15,7 @@ class Chord:
         self.pitches = self.interval_to_pitches([0, 3, 7])
         return self.sort()
 
-    def add_n(self, n) -> Chord:
+    def add_n(self, n: int) -> Chord:
         pitch_to_add = Pitch.new_with_number(self.root.number + n)
         self.pitches.append(pitch_to_add)
         return self.sort()
