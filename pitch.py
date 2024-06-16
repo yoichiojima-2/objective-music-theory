@@ -9,10 +9,10 @@ class Pitch:
         return Pitch(self.root + shift)
 
     def round(self):
-        if self.root >= 0:
-            return Pitch(self.root % 12)
-        else:
-            return Pitch((self.root + 12) % 12)
+        pitch = self.root
+        while pitch < 0:
+            pitch += 12
+        return Pitch(pitch % 12)
 
 
 def test_pitch():
