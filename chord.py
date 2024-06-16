@@ -22,25 +22,25 @@ class Chord:
         self.pitches = self.interval_to_pitches([0, 3, 7])
         return self.sort()
 
-    def add_n(self, n: int) -> Chord:
+    def add_nth(self, n: int) -> Chord:
         pitch_to_add = Pitch(self.root.number + n)
         self.pitches.append(pitch_to_add)
         return self.sort()
 
     def add_seventh(self) -> Chord:
-        self.add_n(10)
+        self.add_nth(10)
         return self.sort()
 
     def add_major_seventh(self) -> Chord:
-        self.add_n(11)
+        self.add_nth(11)
         return self.sort()
 
     def add_nineth(self) -> Chord:
-        self.add_n(14)
+        self.add_nth(14)
         return self.sort()
 
     def add_eleventh(self) -> Chord:
-        self.add_n(17)
+        self.add_nth(17)
         return self.sort()
 
     def interval_to_pitches(self, interval: list[int]) -> Pitches:
