@@ -1,11 +1,18 @@
 from __future__ import annotations
-from pitch import Pitch
+from pitch import Pitch, Pitches
 
 
 class Chord:
     def __init__(self, root: Pitch):
         self.root: Pitch = root
-        self.pitches: list[Pitch] = [root]
+        self.pitches: Pitches = Pitches([root])
+
+    def __str__(self) -> str:
+        return f"root:{self.root.name}\npitches:{[p.name for p in self.pitches]}"
+
+    def sort(self) -> Chord:
+        self.pitches.sort()
+        return self
 
     def major(self) -> Chord:
         self.pitches = self.interval_to_pitches([0, 4, 7])
@@ -36,15 +43,11 @@ class Chord:
         self.add_n(17)
         return self.sort()
 
-    def interval_to_pitches(self, interval: list[int]) -> list[Pitch]:
+    def interval_to_pitches(self, interval: list[int]) -> Pitches:
         pitches = []
         for i in interval:
             pitches.append(Pitch(self.root.number + i))
-        return pitches
-
-    def sort(self) -> Pitch:
-        self.pitches = sorted(self.pitches, key=lambda x: x.number + x.octave * 12)
-        return self
+        return Pitches(pitches)
 
 
 def test_chord():
