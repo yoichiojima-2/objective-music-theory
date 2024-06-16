@@ -14,10 +14,36 @@ class CircleOfFifth:
 def test_circle_of_fifth():
     c = CircleOfFifth(Pitch("c"))
     print([n.name for n in c.pitches])
-    assert [n.name for n in c.pitches] == ["c", "g", "d", "a", "e", "b", "f#", "c#", "g#", "d#", "a#", "f"]
+    assert [n.name for n in c.pitches] == [
+        "c",
+        "g",
+        "d",
+        "a",
+        "e",
+        "b",
+        "f#",
+        "c#",
+        "g#",
+        "d#",
+        "a#",
+        "f",
+    ]
     assert c[1].name == "g"
 
     a = CircleOfFifth(Pitch("a"))
     print([n.name for n in a.pitches])
-    assert [n.name for n in a.pitches] == ["a", "e", "b", "f#", "c#", "g#", "d#", "a#", "f", "c", "g", "d"]
+    assert [n.name for n in a.pitches] == [
+        "a",
+        "e",
+        "b",
+        "f#",
+        "c#",
+        "g#",
+        "d#",
+        "a#",
+        "f",
+        "c",
+        "g",
+        "d",
+    ]
     assert a[2].name == "b"
