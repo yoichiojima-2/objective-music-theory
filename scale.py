@@ -1,8 +1,13 @@
 from pitch import Pitch
 from circle_of_fifth import CircleOfFifth
+from dataclasses import dataclass
 
 
+@dataclass
 class Scale:
+    root: Pitch
+    notes: list[int]
+
     def __init__(self, root: Pitch, feeling: int, length: int = 7):
         cof = CircleOfFifth(cursor=root)
 
