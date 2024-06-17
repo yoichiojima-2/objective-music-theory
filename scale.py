@@ -4,15 +4,15 @@ from circle_of_fifth import CircleOfFifth
 
 class Scale:
     def __init__(self, root: Pitch, feeling: int, length: int = 7):
-        rewind_cnt = feeling * -1 + 1
-        cur = root
-        for _ in range(rewind_cnt):
-            cur = CircleOfFifth.prev(cur)
+        cof = CircleOfFifth(cursor=root)
 
-        notes = [cur.round().root]
+        for _ in range(feeling * -1 + 1):
+            cof.prev()
+
+        notes = [cof.cursor.round().number]
         for _ in range(length - 1):
-            cur = CircleOfFifth.next(cur)
-            notes.append(cur.round().root)
+            cof.next()
+            notes.append(cof.cursor.round().number)
 
         self.root = root
         self.notes = sorted(notes)

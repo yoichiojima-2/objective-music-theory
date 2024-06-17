@@ -4,18 +4,22 @@ from pitch import Pitch
 
 @dataclass
 class CircleOfFifth:
-    @staticmethod
-    def next(pitch: Pitch):
-        return pitch.rel(7).round()
+    cursor: Pitch
 
-    @staticmethod
-    def prev(pitch: Pitch):
-        return pitch.rel(-7).round()
+    def next(self):
+        self.cursor = self.cursor.rel(7).round()
+        return self.cursor
+
+    def prev(self):
+        self.cursor = self.cursor.rel(-7).round()
+        return self.cursor
 
 
 def test_circle_of_fiftth():
     p = Pitch(0)
-    assert CircleOfFifth.next(p).root == 7
-    assert CircleOfFifth.prev(p).root == 5
-    print(CircleOfFifth.next(p).root)
-    print(CircleOfFifth.prev(p).root)
+    cof = CircleOfFifth(cursor=p)
+    assert cof.cursor.number == 0
+    cof.next()
+    assert cof.cursor.number == 7
+    cof.prev()
+    assert cof.cursor.number == 0
