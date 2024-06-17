@@ -18,8 +18,14 @@ class CircleOfFifth:
 def test_circle_of_fiftth():
     p = Pitch(0)
     cof = CircleOfFifth(cursor=p)
+    print(cof.cursor)
     assert cof.cursor.number == 0
     cof.next()
+    print(cof.cursor)
     assert cof.cursor.number == 7
     cof.prev()
+    print(cof.cursor)
     assert cof.cursor.number == 0
+    cof.prev()
+    print(cof.cursor)
+    assert cof.cursor.number == 5
