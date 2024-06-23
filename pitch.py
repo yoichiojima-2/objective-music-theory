@@ -11,8 +11,7 @@ class Pitch:
         shifted_num = self.number + shift
         if shifted_num >= 0:
             return Pitch(
-                number = shifted_num % 12,
-                octave = self.octave + (shifted_num // 12)
+                number=shifted_num % 12, octave=self.octave + (shifted_num // 12)
             )
         else:
             octave_shift = 0
@@ -20,14 +19,26 @@ class Pitch:
                 shifted_num += 12
                 octave_shift -= 1
 
-            return Pitch(
-                number = shifted_num,
-                octave = self.octave + octave_shift
-            )
+            return Pitch(number=shifted_num, octave=self.octave + octave_shift)
 
     def round(self) -> Pitch:
         self.ocvate = 0
         return self
+
+
+class Pitches:
+    pitches: list[Pitch]
+
+    def __init__(self, pitches: list[Pitch]):
+        self.pitches = pitches
+
+   def __iter__(self):
+        self._iter = iter(self.pitches)
+        return self
+
+    def __next__(self):
+        return next(self._iter)
+
 
 
 def test_pitch():
@@ -50,3 +61,6 @@ def test_pitch():
     print(p4)
     assert p4.number == 5
     assert p4.octave == -1
+
+    ps = Pitches([Pitch(0), Pitch(1)])
+    print(ps)
