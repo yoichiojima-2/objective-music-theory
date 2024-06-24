@@ -1,21 +1,53 @@
+from __future__ import annotations
 from dataclasses import dataclass
 import itertools
+
 
 @dataclass
 class Pitch:
     number: int
-    octave: int
+    octave: int = 0
+
+    def rel(self, n) -> Pitch:
+        return Pitch(self.number + n)
 
 
 class Pitches:
     pitches: list[Pitch]
 
+    def __init__(self, pitches: list[Pitch]):
+        self.pitches = pitches
+
     def __iter__(self) -> Pitch:
-        pass
+        self._iter = iter(self.pitches)
+        return self._iter
 
     def __next__(self) -> Pitch:
-        pass
+        return next(self._iter)
 
-    def cycle(self, n: int) -> Pitch:
+    def cycle(self, n) -> Pitch:
+        cnt = 0
         for i in itertools.cycle(self.pitches):
+            if cnt == n:
+                break
+            cnt += 1
             yield i
+
+
+def test_pitch():
+    p = Pitch(0)
+    assert p.number == 0
+    assert p.octave == 0
+
+    p2 = p.rel(2)
+    assert p2.number == 2
+
+    ps = Pitches([Pitch(0), Pitch(1), Pitch(2)])
+    ps.pitches[0].number == 0
+    ps.pitches[1].number == 1
+
+    for i, p in enumerate(ps):
+        print("iterate:", i, p)
+
+    for i, p in enumerate(ps.cycle(10)):
+        print("cycle:", i, p)
