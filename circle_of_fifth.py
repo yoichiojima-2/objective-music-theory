@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass
 from pitch import Pitch
 
@@ -6,26 +7,31 @@ from pitch import Pitch
 class CircleOfFifth:
     cursor: Pitch
 
-    def next(self):
-        self.cursor = self.cursor.rel(7).round()
-        return self.cursor
+    def __init__(self, cursor: Pitch):
+        self.cursor = cursor
 
-    def prev(self):
-        self.cursor = self.cursor.rel(-7).round()
-        return self.cursor
+    def shift(self, n) -> CircleOfFifth:
+        self.cursor = self.cursor.rel(n * 7)
+        return self
 
 
-def test_circle_of_fiftth():
-    p = Pitch(0)
-    cof = CircleOfFifth(cursor=p)
-    print(cof.cursor)
+def test_circle_of_fifth():
+    # start with c
+    cof = CircleOfFifth(Pitch(0))
     assert cof.cursor.number == 0
-    cof.next()
-    print(cof.cursor)
-    assert cof.cursor.number == 7
-    cof.prev()
-    print(cof.cursor)
-    assert cof.cursor.number == 0
-    cof.prev()
-    print(cof.cursor)
+    assert cof.cursor.octave == 0
+
+    # shift clockwise 2 times
+    cof.shift(2)
+
+    # should be d + 1 octave
+    assert cof.cursor.number == 2
+    assert cof.cursor.octave == 1
+
+    # shift counter clockwise 3 times
+    cof.shift(-3)
+
+    # should be f - 1 octave
     assert cof.cursor.number == 5
+    assert cof.cursor.octave == -1
+

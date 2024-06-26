@@ -1,33 +1,28 @@
+from __future__ import annotations
 from pitch import Pitch, Pitches
 from circle_of_fifth import CircleOfFifth
-from dataclasses import dataclass
 
 
-@dataclass
 class Scale:
-    root: Pitch
-    pitches: Pitches
-    feeling: int
-    length: int
+    def __init__(self, root: Pitch, feeling: int = 0, length: int = 7) -> Pitches:
+        cof = CircleOfFifth(root)
 
-    def __init__(self, root: Pitch, feeling: int, length: int = 7):
-        self.root = root
-        self.feeling = feeling
-        self.length = length
+        counter_clockwise = feeling + 1
 
-        cof = CircleOfFifth(cursor=root)
+        notes_to_add = []
 
-        for _ in range(feeling * -1 + 1):
-            cof.prev()
+        cof.shift(-counter_clockwise)
+        for _ in range(counter_clockwise):
+            notes_to_add.append(cof.cursor)
+            cof.shift(1)
 
-        notes = [cof.cursor]
-        for _ in range(length - 1):
-            cof.next()
-            notes.append(cof.cursor)
+        scale = []
+        for _ in range(length - counter_clockwise):
+            scale.append(cof.cursor)
+            cof.shift(1)
 
-        self.pitches = Pitches(notes)
+        self.pitches = Pitches(scale + notes_to_add)
 
 
 def test_scale():
-    s = Scale(Pitch(0), feeling=0)
-    print([i.number for i in s.pitches])
+    cionian = Scale(Pitch(0), 0, 7)
