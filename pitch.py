@@ -9,7 +9,10 @@ class Pitch:
     octave: int = 0
 
     def rel(self, n) -> Pitch:
-        return Pitch(self.number + n)
+        return Pitch(
+            number = self.number + n % 12,
+            octave = self.octave + n // 12
+        )
 
 
 class Pitches:
@@ -41,6 +44,15 @@ def test_pitch():
 
     p2 = p.rel(2)
     assert p2.number == 2
+    assert p2.octave == 0
+
+    p3 = p.rel(13)
+    assert p3.number == 1
+    assert p3.octave == 1
+
+    p4 = p.rel(-7)
+    assert p4.number == 5
+    assert p4.octave == -1
 
     ps = Pitches([Pitch(0), Pitch(1), Pitch(2)])
     ps.pitches[0].number == 0
@@ -49,5 +61,5 @@ def test_pitch():
     for i, p in enumerate(ps):
         print("iterate:", i, p)
 
-    for i, p in enumerate(ps.cycle(10)):
+    for i, p in enumerate(ps.cycle(6)):
         print("cycle:", i, p)
