@@ -10,8 +10,8 @@ class Pitch:
 
     def rel(self, n) -> Pitch:
         return Pitch(
-            number = self.number + n % 12,
-            octave = self.octave + n // 12
+            number = (self.number + n) % 12,
+            octave = self.octave + (self.number + n) // 12
         )
 
 

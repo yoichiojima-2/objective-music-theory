@@ -20,13 +20,17 @@ def test_circle_of_fifth():
     cof = CircleOfFifth(Pitch(0))
     assert cof.cursor.number == 0
     assert cof.cursor.octave == 0
+
     # shift clockwise 2 times
     cof.shift(2)
+
     # should be d + 1 octave
     assert cof.cursor.number == 2
     assert cof.cursor.octave == 1
+
     # shift counter clockwise 3 times
     cof.shift(-3)
+
     # should be f - 1 octave
     assert cof.cursor.number == 5
     assert cof.cursor.octave == -1
