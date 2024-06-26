@@ -15,28 +15,6 @@ class Pitch:
         )
 
 
-class Pitches:
-    pitches: list[Pitch]
-
-    def __init__(self, pitches: list[Pitch]):
-        self.pitches = pitches
-
-    def __iter__(self) -> Pitch:
-        self._iter = iter(self.pitches)
-        return self._iter
-
-    def __next__(self) -> Pitch:
-        return next(self._iter)
-
-    def cycle(self, n) -> Pitch:
-        cnt = 0
-        for i in itertools.cycle(self.pitches):
-            if cnt == n:
-                break
-            cnt += 1
-            yield i
-
-
 def test_pitch():
     p = Pitch(0)
     assert p.number == 0
