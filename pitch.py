@@ -11,8 +11,7 @@ class Pitch:
 
     def rel(self, n) -> Pitch:
         return Pitch(
-            number = (self.number + n) % 12,
-            octave = self.octave + (self.number + n) // 12
+            number=(self.number + n) % 12, octave=self.octave + (self.number + n) // 12
         )
 
     @staticmethod
@@ -40,6 +39,7 @@ class Pitch:
                 return Pitch(9)
             case "A#" | "Bb":
                 return Pitch(10)
+
 
 class Pitches:
     pitches: list[Pitch]

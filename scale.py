@@ -9,7 +9,6 @@ class Scale:
 
         counter_clockwise = feeling - 1
 
-
         cof.shift(counter_clockwise)
         for _ in range(counter_clockwise):
             cof.shift(1)
@@ -19,12 +18,7 @@ class Scale:
             scale.append(cof.cursor)
             cof.shift(1)
 
-        self.pitches = (
-            Pitches(scale)
-            .reset_octave()
-            .sort()
-            .pitches
-        )
+        self.pitches = Pitches(scale).reset_octave().sort().pitches
 
 
 def test_scale():
