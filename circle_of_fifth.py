@@ -34,3 +34,4 @@ def test_circle_of_fifth():
     # should be f - 1 octave
     assert cof.cursor.number == 5
     assert cof.cursor.octave == -1
+

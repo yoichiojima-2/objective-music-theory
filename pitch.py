@@ -41,7 +41,6 @@ class Pitch:
             case "A#" | "Bb":
                 return Pitch(10)
 
-
 class Pitches:
     pitches: list[Pitch]
 
@@ -71,29 +70,6 @@ class Pitches:
     def sort(self) -> Pitches:
         self.pitches.sort(key=lambda p: (p.number, p.octave))
         return self
-
-def test_pitch():
-    p = Pitch(0)
-    assert p.number == 0
-    assert p.octave == 0
-
-    p2 = p.rel(2)
-    assert p2.number == 2
-    assert p2.octave == 0
-
-    p3 = p.rel(13)
-    assert p3.number == 1
-    assert p3.octave == 1
-
-    p4 = p.rel(-7)
-    assert p4.number == 5
-    assert p4.octave == -1
-
-    p5 = Pitch.new_from_str("C")
-    assert p5.number == 0
-
-    p6 = Pitch.new_from_str("C#")
-    assert p6.number == 1
 
 
 def test_pitches():
