@@ -7,6 +7,8 @@ class Scale:
     def __init__(self, root: Pitch, feeling: int = 0, length: int = 7) -> Pitches:
         cof = CircleOfFifth(root)
 
+        # set defauult scale to ionian which needs to
+        # shift 1 counter clockwise on the circle of fifth
         counter_clockwise = feeling - 1
 
         cof.shift(counter_clockwise)
