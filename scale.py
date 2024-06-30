@@ -9,11 +9,9 @@ class Scale:
 
         counter_clockwise = feeling - 1
 
-        notes_to_add_later = []
 
         cof.shift(counter_clockwise)
         for _ in range(counter_clockwise):
-            notes_to_add_later.append(cof.cursor)
             cof.shift(1)
 
         scale = []
@@ -22,7 +20,7 @@ class Scale:
             cof.shift(1)
 
         self.pitches = (
-            Pitches(scale + notes_to_add_later)
+            Pitches(scale)
             .reset_octave()
             .sort()
             .pitches
