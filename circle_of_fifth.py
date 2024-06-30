@@ -17,7 +17,7 @@ class CircleOfFifth:
 
 def test_circle_of_fifth():
     # start with c
-    cof = CircleOfFifth(Pitch(0))
+    cof = CircleOfFifth(Pitch.new_from_str("C"))
     assert cof.cursor.number == 0
     assert cof.cursor.octave == 0
 
