@@ -4,7 +4,7 @@ from circle_of_fifth import CircleOfFifth
 
 
 class Scale:
-    def __init__(self, root: Pitch, feeling: int = 0, length: int = 7) -> Pitches:
+    def __init__(self, root: Pitch, feeling: int = 0, length: int = 7):
         cof = CircleOfFifth(root)
 
         # set defauult scale to ionian which needs to
