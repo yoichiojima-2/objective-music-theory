@@ -11,7 +11,7 @@ class Scale:
         scale = []
         cof.shift(feeling - 1)
         for _ in range(length):
-            scale.append(cof.shift(1))
+            scale.append(cof.shift(1).cursor)
 
         return Pitches(scale).reset_octave().sort()
 
