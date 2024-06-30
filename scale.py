@@ -30,9 +30,9 @@ class Scale:
 
 
 def test_scale():
-    cionian = Scale(Pitch(0), 0, 7)
-    cionian_nums = [p.number for p in cionian.pitches]
-    assert cionian_nums == [0, 2, 4, 5, 7, 9, 11]
+    c_ionian = Scale(Pitch.new_from_str("C"), 0, 7)
+    c_ionian_nums = [p.number for p in c_ionian.pitches]
+    assert c_ionian_nums == [0, 2, 4, 5, 7, 9, 11]
 
     c_aeolian = Scale(Pitch.new_from_str("C"), -3, 7)
     c_aeolian_nums = [p.number for p in c_aeolian.pitches]
