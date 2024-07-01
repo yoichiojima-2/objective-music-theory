@@ -71,6 +71,10 @@ class Pitches:
         self.pitches.sort(key=lambda p: (p.number, p.octave))
         return self
 
+    @property
+    def numbers(self) -> list[int]:
+        return [i.number for i in self.pitches]
+
 
 def test_pitches():
     ps = Pitches([Pitch(0), Pitch(1), Pitch(2)])
